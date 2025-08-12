@@ -1,1 +1,13 @@
-@import "bootstrap"
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  width: 100%;
+}
+
+li {
+  list-style-type: none;
+}
