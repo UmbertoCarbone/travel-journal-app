@@ -45,13 +45,15 @@ function App() {
     setOpenCardId(openCardId === id ? null : id);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setFormData((prev) => ({
+    ...prev,
+    [name]: (name === "latitude" || name === "longitude")
+      ? value === "" ? "" : Number(value)
+      : value,
+  }));
+};
 
   // Gestione upload file su Supabase Storage
   const handleFileChange = async (e) => {
