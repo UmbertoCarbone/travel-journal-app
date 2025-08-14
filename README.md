@@ -21,5 +21,5 @@ Giorno 3
 - fix per caricare le foto anche da Mobile (testato solo su Iphone)
 
 
-
+ps: per caricare la foto, massimo 5MB 
 Sito web: https://boolean-travel.vercel.app/
