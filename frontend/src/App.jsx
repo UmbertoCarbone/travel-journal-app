@@ -148,6 +148,29 @@ function App() {
     );
   };
 
+  // Reset form e campo file quando apro/chiudo il form
+  const handleShowForm = () => {
+    setShowForm((v) => !v);
+    setFormData({
+      place: "",
+      description: "",
+      mood: "",
+      positive_reflection: "",
+      negative_reflection: "",
+      physical_effort: 1,
+      economic_effort: 1,
+      actual_expense: "",
+      tags: "",
+      photo_url: "",
+      video_url: "",
+      latitude: "",
+      longitude: ""
+    });
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   const viaggiFiltrati = viaggi.filter(v =>
     v.place.toLowerCase().includes(filterPlace.toLowerCase()) &&
     v.description.toLowerCase().includes(filterDescription.toLowerCase())
@@ -176,7 +199,7 @@ function App() {
       <div className="mb-4 text-center">
         <button
           className="btn btn-success"
-          onClick={() => setShowForm((v) => !v)}
+          onClick={handleShowForm}
         >
           {showForm ? "Chiudi form" : "Aggiungi nuova tappa"}
         </button>
