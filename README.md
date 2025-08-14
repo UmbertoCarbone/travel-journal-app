@@ -13,3 +13,4 @@ Giorno 2
 - creato storage su supabase.
 - creato form.
 - aggiungendo la nuova tappa, si vede anche l'img scelta.
+- aggiunto mappa con leaflet
