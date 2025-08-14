@@ -63,6 +63,9 @@ function App() {
         ...prev,
         photo_url: "",
       }));
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
       return;
     }
     const filePath = `${Date.now()}_${file.name}`;
@@ -72,11 +75,13 @@ function App() {
 
     if (error) {
       alert("Errore nel caricamento dell'immagine");
-      // Azzeriamo photo_url in caso di errore
       setFormData((prev) => ({
         ...prev,
         photo_url: "",
       }));
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
       return;
     }
 
