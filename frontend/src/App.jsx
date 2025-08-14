@@ -102,7 +102,7 @@ function App() {
         latitude: "",
         longitude: ""
       });
-      // Reset campo file
+      // Reset campo file dopo submit
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
       }
