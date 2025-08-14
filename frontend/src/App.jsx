@@ -45,15 +45,15 @@ function App() {
     setOpenCardId(openCardId === id ? null : id);
   };
 
-const handleInputChange = (e) => {
-  const { name, value } = e.target;
-  setFormData((prev) => ({
-    ...prev,
-    [name]: (name === "latitude" || name === "longitude")
-      ? value === "" ? "" : Number(value)
-      : value,
-  }));
-};
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: (name === "latitude" || name === "longitude")
+        ? value === "" ? "" : Number(value)
+        : value,
+    }));
+  };
 
   // Gestione upload file su Supabase Storage
   const handleFileChange = async (e) => {
@@ -115,15 +115,7 @@ const handleInputChange = (e) => {
 
   return (
     <div className="container mt-4">
-      <h1>Travel Journal</h1>
-      <div className="mb-4 text-center">
-        <button
-          className="btn btn-success"
-          onClick={() => setShowForm((v) => !v)}
-        >
-          {showForm ? "Chiudi form" : "Aggiungi nuova tappa"}
-        </button>
-      </div>
+      <h1 className="text-center">Travel Journal</h1>
       <Filtri
         filterPlace={filterPlace}
         setFilterPlace={setFilterPlace}
@@ -131,14 +123,6 @@ const handleInputChange = (e) => {
         setFilterDescription={setFilterDescription}
       />
       <Mappa viaggi={viaggiFiltrati} />
-      {showForm && (
-        <FormTappa
-          formData={formData}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-          handleFileChange={handleFileChange}
-        />
-      )}
       <div className="row">
         {viaggiFiltrati.map((viaggio) => (
           <CardViaggio
@@ -149,6 +133,23 @@ const handleInputChange = (e) => {
           />
         ))}
       </div>
+      {/* Bottone e form SOTTO le card */}
+      <div className="mb-4 text-center">
+        <button
+          className="btn btn-success"
+          onClick={() => setShowForm((v) => !v)}
+        >
+          {showForm ? "Chiudi form" : "Aggiungi nuova tappa"}
+        </button>
+      </div>
+      {showForm && (
+        <FormTappa
+          formData={formData}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          handleFileChange={handleFileChange}
+        />
+      )}
     </div>
   );
 }

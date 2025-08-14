@@ -1,6 +1,6 @@
 export default function Filtri({ filterPlace, setFilterPlace, filterDescription, setFilterDescription }) {
   return (
-    <div className="row mb-4">
+    <div className="row mb-4 justify-content-center">
       <div className="col-md-4 mb-2">
         <input
           type="text"

@@ -14,3 +14,6 @@ Giorno 2
 - creato form.
 - aggiungendo la nuova tappa, si vede anche l'img scelta.
 - aggiunto mappa con leaflet
+- aggiunta marker + fix 
+
+
