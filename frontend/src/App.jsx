@@ -65,13 +65,16 @@ function App() {
       .upload(filePath, file);
 
     if (error) {
+      alert("Errore nel caricamento dell'immagine");
       return;
     }
 
+    // Ottieni l'URL pubblico
     const { data } = supabase
       .storage
       .from('travel-images')
       .getPublicUrl(filePath);
+
     setFormData((prev) => ({
       ...prev,
       photo_url: data.publicUrl,
