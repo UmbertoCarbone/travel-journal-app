@@ -58,7 +58,13 @@ function App() {
   // Gestione upload file su Supabase Storage
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
-    if (!file) return;
+    if (!file) {
+      setFormData((prev) => ({
+        ...prev,
+        photo_url: "",
+      }));
+      return;
+    }
     const filePath = `${Date.now()}_${file.name}`;
     const { error } = await supabase.storage
       .from('travel-images')
@@ -66,6 +72,11 @@ function App() {
 
     if (error) {
       alert("Errore nel caricamento dell'immagine");
+      // Azzeriamo photo_url in caso di errore
+      setFormData((prev) => ({
+        ...prev,
+        photo_url: "",
+      }));
       return;
     }
 
@@ -73,6 +84,7 @@ function App() {
       .storage
       .from('travel-images')
       .getPublicUrl(filePath);
+
     setFormData((prev) => ({
       ...prev,
       photo_url: data.publicUrl,
