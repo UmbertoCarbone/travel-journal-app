@@ -1,4 +1,4 @@
-export default function FormTappa({ formData, handleInputChange, handleSubmit, handleFileChange, getCurrentLocation }) {
+export default function FormTappa({ formData, handleInputChange, handleSubmit, handleFileChange, getCurrentLocation, fileInputRef }) {
     return (
         <form className="card p-4 mb-4" onSubmit={handleSubmit}>
             <div className="row g-3">
@@ -108,6 +108,7 @@ export default function FormTappa({ formData, handleInputChange, handleSubmit, h
                         className="form-control"
                         accept="image/*"
                         onChange={handleFileChange}
+                        ref={fileInputRef}
                     />
                     {formData.photo_url && (
                         <img

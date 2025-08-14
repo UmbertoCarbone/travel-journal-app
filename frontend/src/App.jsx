@@ -1,5 +1,4 @@
-
- import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { supabase } from "./supabaseClient";
 import FormTappa from "../components/form";
 import Filtri from "../components/Filtri";
@@ -28,6 +27,7 @@ function App() {
 
   const [filterPlace, setFilterPlace] = useState("");
   const [filterDescription, setFilterDescription] = useState("");
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     fetchViaggi();
@@ -102,6 +102,10 @@ function App() {
         latitude: "",
         longitude: ""
       });
+      // Reset campo file
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
       setShowForm(false);
       fetchViaggi();
     }
@@ -167,6 +171,7 @@ function App() {
           handleSubmit={handleSubmit}
           handleFileChange={handleFileChange}
           getCurrentLocation={getCurrentLocation}
+          fileInputRef={fileInputRef}
         />
       )}
     </div>
