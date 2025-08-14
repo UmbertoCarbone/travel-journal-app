@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+
+ import { useEffect, useState } from "react";
 import { supabase } from "./supabaseClient";
 import FormTappa from "../components/form";
 import Filtri from "../components/Filtri";
@@ -25,7 +26,6 @@ function App() {
     longitude: ""
   });
 
-  // Stati per i filtri
   const [filterPlace, setFilterPlace] = useState("");
   const [filterDescription, setFilterDescription] = useState("");
 
@@ -69,12 +69,10 @@ function App() {
       return;
     }
 
-    // Ottieni l'URL pubblico
     const { data } = supabase
       .storage
       .from('travel-images')
       .getPublicUrl(filePath);
-
     setFormData((prev) => ({
       ...prev,
       photo_url: data.publicUrl,
@@ -83,7 +81,6 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Gestione array tags
     const tagsArray = formData.tags
       ? formData.tags.split(",").map((t) => t.trim()).filter(Boolean)
       : [];
@@ -110,7 +107,26 @@ function App() {
     }
   };
 
-  // Filtra le tappe per place e description
+  // Geolocalizzazione
+  const getCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      alert("Geolocalizzazione non supportata dal browser.");
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setFormData((prev) => ({
+          ...prev,
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        }));
+      },
+      (error) => {
+        alert("Impossibile ottenere la posizione.");
+      }
+    );
+  };
+
   const viaggiFiltrati = viaggi.filter(v =>
     v.place.toLowerCase().includes(filterPlace.toLowerCase()) &&
     v.description.toLowerCase().includes(filterDescription.toLowerCase())
@@ -118,14 +134,14 @@ function App() {
 
   return (
     <div className="container mt-4">
-      <h1 className="text-center">Travel Journal</h1>
+      <h1>Travel Journal</h1>
+      <Mappa viaggi={viaggiFiltrati} />
       <Filtri
         filterPlace={filterPlace}
         setFilterPlace={setFilterPlace}
         filterDescription={filterDescription}
         setFilterDescription={setFilterDescription}
       />
-      <Mappa viaggi={viaggiFiltrati} />
       <div className="row">
         {viaggiFiltrati.map((viaggio) => (
           <CardViaggio
@@ -136,7 +152,6 @@ function App() {
           />
         ))}
       </div>
-      {/* Bottone e form SOTTO le card */}
       <div className="mb-4 text-center">
         <button
           className="btn btn-success"
@@ -151,6 +166,7 @@ function App() {
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
           handleFileChange={handleFileChange}
+          getCurrentLocation={getCurrentLocation}
         />
       )}
     </div>

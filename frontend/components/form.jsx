@@ -1,4 +1,4 @@
-export default function FormTappa({ formData, handleInputChange, handleSubmit, handleFileChange }) {
+export default function FormTappa({ formData, handleInputChange, handleSubmit, handleFileChange, getCurrentLocation }) {
     return (
         <form className="card p-4 mb-4" onSubmit={handleSubmit}>
             <div className="row g-3">
@@ -14,13 +14,14 @@ export default function FormTappa({ formData, handleInputChange, handleSubmit, h
                     />
                 </div>
                 <div className="col-md-6">
-                    <label className="form-label">Stato d'animo</label>
+                    <label className="form-label">Stato d'animo*</label>
                     <input
                         type="text"
                         className="form-control"
                         name="mood"
                         value={formData.mood}
                         onChange={handleInputChange}
+                        required
                     />
                 </div>
                 <div className="col-12">
@@ -34,23 +35,25 @@ export default function FormTappa({ formData, handleInputChange, handleSubmit, h
                     />
                 </div>
                 <div className="col-md-6">
-                    <label className="form-label">Riflessione positiva</label>
+                    <label className="form-label">Riflessione positiva*</label>
                     <input
                         type="text"
                         className="form-control"
                         name="positive_reflection"
                         value={formData.positive_reflection}
                         onChange={handleInputChange}
+                        required
                     />
                 </div>
                 <div className="col-md-6">
-                    <label className="form-label">Riflessione negativa</label>
+                    <label className="form-label">Riflessione negativa*</label>
                     <input
                         type="text"
                         className="form-control"
                         name="negative_reflection"
                         value={formData.negative_reflection}
                         onChange={handleInputChange}
+                        required
                     />
                 </div>
                 <div className="col-md-4">
@@ -135,6 +138,15 @@ export default function FormTappa({ formData, handleInputChange, handleSubmit, h
                         value={formData.longitude}
                         onChange={handleInputChange}
                     />
+                </div>
+                <div className="col-12 text-center">
+                    <button
+                        type="button"
+                        className="btn btn-outline-primary mt-2"
+                        onClick={getCurrentLocation}
+                    >
+                        Usa la mia posizione
+                    </button>
                 </div>
             </div>
             <div className="mt-3 text-end">
