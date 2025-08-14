@@ -16,5 +16,10 @@ Giorno 2
 - aggiunto mappa con leaflet
 - aggiunta marker + fix 
 
+Giorno 3
+- aggiunto tasto geolocalizzazione
+- fix per caricare le foto anche da Mobile (testato solo su Iphone)
+
+
 
 Sito web: https://boolean-travel.vercel.app/
